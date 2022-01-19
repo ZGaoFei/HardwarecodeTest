@@ -1,18 +1,7 @@
 package com.demo.hardwarecodetest.Utis;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Environment;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
-
-import androidx.core.app.ActivityCompat;
 
 import com.demo.hardwarecodetest.HookEntity;
 
@@ -26,10 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.NetworkInterface;
-import java.util.Collections;
-import java.util.List;
-import java.util.regex.Pattern;
+import java.util.Random;
 
 public final class Utils {
     private static final String CACHE_FILE_NAME = "/clean2.txt";
@@ -123,66 +109,6 @@ public final class Utils {
         return content.toString();
     }
 
-    public static void saveDeviceIdToFile(String deviceId) {
-        File file = Environment.getExternalStorageDirectory();
-        try {
-            FileWriter fw = new FileWriter(file.getAbsolutePath() + CACHE_FILE_NAME);
-            fw.flush();
-            fw.write(deviceId);
-            fw.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static String getDeviceIdFromFile() {
-        File file = Environment.getExternalStorageDirectory();
-        String path = file.getAbsolutePath() + CACHE_FILE_NAME;
-        FileInputStream in = null;
-        BufferedReader reader = null;
-        StringBuilder content = new StringBuilder();
-        try {
-            in = new FileInputStream(path);
-            reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                content.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return content.toString();
-    }
-
-    public static String getIMEI(Context context) {
-        if (PackageManager.PERMISSION_GRANTED !=
-                ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)) {
-            return "";
-        }
-        String imei = null;
-        TelephonyManager telephonyManager = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-        if (telephonyManager != null) {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                imei = telephonyManager.getImei();
-//            } else {
-//                imei = telephonyManager.getDeviceId();
-//            }
-            String a = telephonyManager.getImei();
-            Log.e("test", "=======getImei=====" + a);
-            imei = telephonyManager.getDeviceId();
-            Log.e("test", "=======getDeviceId=======" + imei);
-        }
-        return imei != null ? imei : "";
-    }
-
     public static boolean getRoot(String pkgCodePath) {
         Process process = null;
         DataOutputStream os = null;
@@ -207,4 +133,70 @@ public final class Utils {
         }
         return true;
     }
+
+    // 只返回数字
+    public static String getRandomWithInt(int length) {
+        String str = "0123456789";
+        return getRandom(str, length);
+    }
+
+    // 带数字和小写字母
+    public static String getRandomWithLittle(int length) {
+        String str = "abcdefghijklmnopqrstuvwxyz0123456789";
+        return getRandom(str, length);
+    }
+
+    // 带数字和大写字母和小写字母
+    public static String getRandomWithString(int length) {
+        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        return getRandom(str, length);
+    }
+
+    public static String getRandom(String parse, int length) {
+        if (TextUtils.isEmpty(parse)) {
+            return "";
+        }
+        int l = parse.length();
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(l);
+            sb.append(parse.charAt(number));
+        }
+        return sb.toString();
+    }
+
+    public static void deleteFile() {
+        File file = Environment.getExternalStorageDirectory();
+        String android = file.getAbsolutePath() + "/Android";
+        String netease = file.getAbsolutePath() + "/netease";
+        String tencent = file.getAbsolutePath() + "/Tencent";
+
+        // 删除Android目录下的文件夹
+        deleteDirWithFile(new File(android), false);
+
+        // 删除netease
+        deleteDirWithFile(new File(netease), true);
+
+        // 删除Tencent
+        deleteDirWithFile(new File(tencent), true);
+    }
+
+    //删除文件夹和文件夹里面的文件
+    public static void deleteDirWithFile(File dir, boolean isDeleteRootFile) {
+        if (dir == null || !dir.exists() || !dir.isDirectory()) {
+            return;
+        }
+        for (File file : dir.listFiles()) {
+            if (file.isFile()) {
+                file.delete(); // 删除所有文件
+            } else if (file.isDirectory()) {
+                deleteDirWithFile(file, true); // 递规的方式删除文件夹
+            }
+        }
+        if (isDeleteRootFile) {
+            dir.delete();// 删除目录本身
+        }
+    }
+
 }

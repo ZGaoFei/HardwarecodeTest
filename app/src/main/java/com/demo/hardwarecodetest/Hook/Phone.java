@@ -25,8 +25,8 @@ public class Phone {
         HookEntity hookEntity = Utils.stringToEntity(hookData);
 
         // getType(sharePkgParam);
-        Bluetooth(sharePkgParam, hookEntity);
-        Wifi(sharePkgParam, hookEntity);
+        // Bluetooth(sharePkgParam, hookEntity);
+        // Wifi(sharePkgParam, hookEntity);
         Telephony(sharePkgParam, hookEntity);
     }
 
