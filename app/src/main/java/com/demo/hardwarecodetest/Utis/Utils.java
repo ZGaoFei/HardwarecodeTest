@@ -50,6 +50,8 @@ public final class Utils {
             object.put("mac", entity.getMac());
             object.put("bluetoothMac", entity.getBluetoothMac());
             object.put("ip", entity.getIp());
+            object.put("baseBand", entity.getBaseBand());
+            object.put("simSerial", entity.getSimSerial());
             return object.toString();
         } catch (JSONException e) {
             e.printStackTrace();
@@ -71,6 +73,8 @@ public final class Utils {
             entity.setMac(object.optString("mac"));
             entity.setBluetoothMac(object.optString("bluetoothMac"));
             entity.setIp(object.optString("ip"));
+            entity.setBaseBand(object.optString("baseBand"));
+            entity.setSimSerial(object.optString("simSerial"));
             return entity;
         } catch (JSONException e) {
             e.printStackTrace();

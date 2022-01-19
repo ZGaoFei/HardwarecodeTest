@@ -176,6 +176,9 @@ public class Phone {
             XposedBridge.log(" IMEI 错误: " + ex.getMessage());
         }
 
+        HookTelephony(TelePhone, loadPkgParam, "getSimSerialNumber",
+                hookEntity.getSimSerial());
+
         /*
         HookTelephony(TelePhone, loadPkgParam, "getDeviceSoftwareVersion",
                 SharedPref.getXValue("deviceversion"));// 返系统版本

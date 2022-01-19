@@ -92,14 +92,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // mac: a8:a6:68:a3:d9:ef / 12
         // 蓝牙mac: BC:1A:EA:D9:8D:98 / 10
         // ip: -123456789
+        // baseband: SCL23KDU1BNG3 / 13
+        // simSerial: 89860179328595969501 / 20
 
         HookEntity entity = new HookEntity();
-        entity.setImei("888888888888885");
-        entity.setAndroidId("asdfghjklasdfghf");
-        entity.setSerial("asdf1234");
-        entity.setMac("a0:a1:a2:a3:a4:a5");
-        entity.setBluetoothMac("B0:B1:B2:B3:B4:B5");
-        entity.setIp("-123456789");
+        entity.setImei("888888888888883");
+        entity.setAndroidId("asdfghjklasdfghi");
+        entity.setSerial("asdf1237");
+        entity.setMac("a0:a1:a2:a3:a4:a8");
+        entity.setBluetoothMac("B0:B1:B2:B3:B4:B8");
+        entity.setIp("-123456782");
+        entity.setBaseBand("SCL23KDU1BNG3");
+        entity.setSimSerial("89860179328595969504");
 
         String data = Utils.entityToString(entity);
         Log.e("test", "=====changer======data==" + data);

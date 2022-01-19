@@ -7,6 +7,8 @@ public class HookEntity {
     private String mac;
     private String bluetoothMac;
     private String ip;
+    private String baseBand;
+    private String simSerial;
 
     public String getImei() {
         return imei;
@@ -56,6 +58,22 @@ public class HookEntity {
         this.ip = ip;
     }
 
+    public String getBaseBand() {
+        return baseBand;
+    }
+
+    public void setBaseBand(String baseBand) {
+        this.baseBand = baseBand;
+    }
+
+    public String getSimSerial() {
+        return simSerial;
+    }
+
+    public void setSimSerial(String simSerial) {
+        this.simSerial = simSerial;
+    }
+
     @Override
     public String toString() {
         return "HookEntity{" +
@@ -65,6 +83,8 @@ public class HookEntity {
                 ", mac='" + mac + '\'' +
                 ", bluetoothMac='" + bluetoothMac + '\'' +
                 ", ip='" + ip + '\'' +
+                ", baseBand='" + baseBand + '\'' +
+                ", simSerial='" + simSerial + '\'' +
                 '}';
     }
 }

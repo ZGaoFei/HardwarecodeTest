@@ -11,6 +11,7 @@ import com.demo.hardwarecodetest.Utis.Utils;
 import java.lang.reflect.Member;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -25,18 +26,22 @@ public class XBuild {
         String hookData = Utils.getHookData();
         HookEntity hookEntity = Utils.stringToEntity(hookData);
 
-        // AndroidSerial(sharePkgParam);
+        AndroidSerial(sharePkgParam, hookEntity);
         // BaseBand(sharePkgParam);
         BuildProp(sharePkgParam, hookEntity);
     }
 
 
-    public void AndroidSerial(XC_LoadPackage.LoadPackageParam loadPkgParam) {
+    public void AndroidSerial(XC_LoadPackage.LoadPackageParam loadPkgParam, HookEntity hookEntity) {
         try {
             Class<?> classBuild = XposedHelpers.findClass("android.os.Build",
                     loadPkgParam.classLoader);
             XposedHelpers.setStaticObjectField(classBuild, "SERIAL",
-                    SharedPref.getXValue("serial")); // 串口序列号
+                    hookEntity.getSerial()); // 串口序列号
+
+            XposedHelpers.findAndHookMethod(classBuild, "getSerial", XC_MethodReplacement.returnConstant(hookEntity.getSerial()));
+
+            /*
             Class<?> classSysProp = Class
                     .forName("android.os.SystemProperties");
             XposedHelpers.findAndHookMethod(classSysProp, "get", String.class,
@@ -52,7 +57,7 @@ public class XBuild {
                             if (serialno.equals("gsm.version.baseband")
                                     || serialno.equals("no message")
                             ) {
-                                param.setResult(SharedPref.getXValue("getBaseband"));
+                                param.setResult(hookEntity.getBaseBand());
                             }
                         }
 
@@ -71,11 +76,13 @@ public class XBuild {
                             if (serialno.equals("gsm.version.baseband")
                                     || serialno.equals("no message")
                             ) {
-                                param.setResult(SharedPref.getXValue("getBaseband"));
+                                param.setResult(hookEntity.getBaseBand());
                             }
                         }
 
                     });
+
+             */
             return;
         } catch (Exception ex) {
             XposedBridge.log(" AndroidSerial 错误: " + ex.getMessage());
