@@ -94,8 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // ip: -123456789
 
         HookEntity entity = new HookEntity();
-        entity.setImei("888888888888883");
-        entity.setAndroidId("asdfghjklasdfghj");
+        entity.setImei("888888888888885");
+        entity.setAndroidId("asdfghjklasdfghf");
         entity.setSerial("asdf1234");
         entity.setMac("a0:a1:a2:a3:a4:a5");
         entity.setBluetoothMac("B0:B1:B2:B3:B4:B5");
