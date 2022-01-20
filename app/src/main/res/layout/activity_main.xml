@@ -7,6 +7,15 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/use_step"
+        android:textColor="#fa5b20"
+        android:textSize="16sp" />
+
     <Button
         android:id="@+id/bt_random_data"
         android:layout_width="match_parent"

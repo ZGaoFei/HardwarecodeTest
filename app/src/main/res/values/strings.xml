@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">HardwarecodeTest</string>
+    
+    <string name="use_step">说明：\n
+        点击【随机生成设备信息并保存】按钮会执行以下步骤：\n
+            \t 1、删除Android文件夹下的所有文件，netease文件夹，Tencent文件夹 \n
+            \t 2、随机生成imei、AndroidID、serial、simSerial并保存到clean.txt文件中 \n
+            \t 3、hook时从clean.txt文件中取出随机生成的值并设置给其他app \n
+        使用步骤：\n
+            \t 1、点击【随机生成设备信息并保存】按钮 \n
+            \t 2、清理需要hook的app的缓存数据，是【清除存储空间】不是【清除缓存】 \n
+            \t 3、重新打开app即可 \n
+        注意： \n
+            \t 1、切记不要删除clean.txt文件，如果删除了，需要重新点击【随机生成设备信息并保存】按钮 \n
+            \t 2、切记要先清理需要hook的app的缓存数据 \n
+    </string>
 </resources>

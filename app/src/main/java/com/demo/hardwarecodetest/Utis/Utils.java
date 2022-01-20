@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
 import java.util.Random;
 
 public final class Utils {
-    private static final String CACHE_FILE_NAME = "/clean2.txt";
+    private static final String CACHE_FILE_NAME = "/clean.txt";
 
     private Utils() {
     }
