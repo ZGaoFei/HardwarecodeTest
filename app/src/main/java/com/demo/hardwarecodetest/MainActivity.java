@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void change() {
         HookEntity entity = randomData();
         String data = Utils.entityToString(entity);
-        Log.e("test", "=====changer======data==" + data);
+        Log.e("test", "=====changer====222==data==" + data);
         Utils.saveHookData(data);
         tvCurrentData.setText(data);
 
@@ -95,6 +96,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // sim serial 20
         String simSerial = Utils.getRandomWithInt(20);
         entity.setSimSerial(simSerial);
+
+        // ip -123456789 9
+        String ip = Utils.getRandomWithInt(9);
+        try {
+            int i = Integer.parseInt("-" + ip);
+            entity.setIp(i);
+        } catch (Exception e) {
+            Log.e("test", "======parseInt========" + e.getMessage());
+        }
 
         return entity;
     }

@@ -26,7 +26,7 @@ public class Phone {
 
         // getType(sharePkgParam);
         // Bluetooth(sharePkgParam, hookEntity);
-        // Wifi(sharePkgParam, hookEntity);
+        Wifi(sharePkgParam, hookEntity);
         Telephony(sharePkgParam, hookEntity);
     }
 
@@ -88,19 +88,19 @@ public class Phone {
     // WIF MAC
     public void Wifi(XC_LoadPackage.LoadPackageParam loadPkgParam, HookEntity hookEntity) {
         try {
-            XposedHelpers.findAndHookMethod("android.net.wifi.WifiInfo",
-                    loadPkgParam.classLoader, "getMacAddress",
-                    new XC_MethodHook() {
-
-                        @Override
-                        protected void afterHookedMethod(MethodHookParam param)
-                                throws Throwable {
-                            // TODO Auto-generated method stub
-                            super.afterHookedMethod(param);
-                            param.setResult(hookEntity.getMac());
-                        }
-
-                    });
+//            XposedHelpers.findAndHookMethod("android.net.wifi.WifiInfo",
+//                    loadPkgParam.classLoader, "getMacAddress",
+//                    new XC_MethodHook() {
+//
+//                        @Override
+//                        protected void afterHookedMethod(MethodHookParam param)
+//                                throws Throwable {
+//                            // TODO Auto-generated method stub
+//                            super.afterHookedMethod(param);
+//                            param.setResult(hookEntity.getMac());
+//                        }
+//
+//                    });
 
             // 内网IP
             XposedHelpers.findAndHookMethod("android.net.wifi.WifiInfo",

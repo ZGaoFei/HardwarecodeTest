@@ -58,7 +58,7 @@ public final class Utils {
             entity.setSerial(object.optString("serial"));
             entity.setMac(object.optString("mac"));
             entity.setBluetoothMac(object.optString("bluetoothMac"));
-            entity.setIp(object.optString("ip"));
+            entity.setIp(object.optInt("ip"));
             entity.setBaseBand(object.optString("baseBand"));
             entity.setSimSerial(object.optString("simSerial"));
             return entity;

@@ -6,7 +6,7 @@ public class HookEntity {
     private String serial;
     private String mac;
     private String bluetoothMac;
-    private String ip;
+    private int ip;
     private String baseBand;
     private String simSerial;
 
@@ -50,11 +50,11 @@ public class HookEntity {
         this.bluetoothMac = bluetoothMac;
     }
 
-    public String getIp() {
+    public int getIp() {
         return ip;
     }
 
-    public void setIp(String ip) {
+    public void setIp(int ip) {
         this.ip = ip;
     }
 
